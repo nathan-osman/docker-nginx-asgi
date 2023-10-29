@@ -10,3 +10,6 @@ RUN apt-get update && apt-get install -y \
   python3-pip \
   supervisor \
   && rm -rf /var/lib/apt/lists/*
+
+# Copy the pip configuration (to prevent errors when installing global packages)
+COPY pip.conf /root/.config/pip/pip.conf
