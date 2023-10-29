@@ -1,0 +1,4 @@
+server {
+    # Load conf files from the asgi.d directory
+    include /etc/nginx/asgi.d/*.conf;
+}
