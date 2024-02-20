@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 
 # Install Nginx, Python 3 (and pip) and supervisor
 RUN apt-get update && apt-get install -y \
+  curl \
   nginx \
   python-is-python3 \
   python3-pip \
@@ -31,3 +32,6 @@ COPY supervisor/supervisord.conf /etc/supervisor/conf.d/
 
 # Run supervisord when started
 CMD ["/usr/bin/supervisord"]
+
+# Application is up and running when it responds to HTTP requests
+HEALTHCHECK CMD curl -f http://localhost || exit 1
