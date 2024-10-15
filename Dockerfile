@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+ENV HTTP_HOST=localhost
+
 # This is the directory where the user is expected to place their code
 WORKDIR /usr/src/app
 
@@ -34,4 +36,5 @@ COPY supervisor/supervisord.conf /etc/supervisor/conf.d/
 CMD ["/usr/bin/supervisord"]
 
 # Application is up and running when it responds to HTTP requests
-HEALTHCHECK CMD curl -f http://localhost || exit 1
+HEALTHCHECK CMD \
+  curl -s -o /dev/null -H "Host: $HTTP_HOST" http://localhost || exit 1
